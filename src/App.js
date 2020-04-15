@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CardList from './components/CardList'
+import imageLoader from './components/images'
+import DropZoneGrid from './components/DropZoneGrid'
+import Coordinates from './components/Coordinates'
+import Message from './components/Message'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      images: [],
+      position: [],
+      players: 0
+    }
+  }
+
+  componentDidMount() {
+    const images = imageLoader()
+    this.setState({images: images})
+    const position = Coordinates()
+    this.setState({position: position})
+    this.setState({players: 4})
+  }
+
+  render () {
+    const { images, position, players } = this.state;
+    return (
+      <div className="App">
+        <Message />
+        <DropZoneGrid />
+        <CardList images={images} position={position} players={players}/>
+      </div>
+    );
+  }
 }
 
 export default App;
