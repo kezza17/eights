@@ -8,19 +8,31 @@ const DropZoneGrid = () => {
 			zone[j][i] = suits[j]+(i+2)
 		}
 	}
+	let face = [[],[],[],[]]
+	const faceCards = ['J', 'Q', 'K', 'A']
+	for (let i=0; i<13; i++) {
+		for (let j=0; j<suits.length; j++) {
+			if (i<9) {
+				face[j][i] = suits[j]+(i+2)
+			} else {
+				face[j][i] = suits[j]+faceCards[i-9]
+			}
+		}
+	}
+
 	return (
 		<div className='dropgrid'>
 			{
-				zone[0].map(i => {
+				zone[0].map((i,k) => {
 					return(
 						<div 
 							key={i}
 							id={i}
-							className='dropzone bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
+							className='dropzone grid bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
 							style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} 
 						>
 							<p className='f3 serif { font-family: georgia } dark-red'>
-								{i.slice(1,)}
+								{face[0][k].slice(2,)}
 
 							</p>
 							<p className='f2 serif { font-family: georgia } dark-red'>
@@ -31,15 +43,16 @@ const DropZoneGrid = () => {
 				})
 			}
 			{
-				zone[1].map(i => {
+				zone[1].map((i,k) => {
 					return(
 						<div 
 							key={i}
-							className='dropzone bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
+							id={i}
+							className='dropzone grid bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
 							style={{display: 'inline-flex', alignItems: 'center', justifyContent: 'center'}} 
 						>
 							<p className='f3 serif { font-family: georgia } black'>
-								{i.slice(1,)}
+								{face[1][k].slice(2,)}
 
 							</p>
 							<p className='f2 serif { font-family: georgia } black'>
@@ -50,15 +63,16 @@ const DropZoneGrid = () => {
 				})
 			}
 			{
-				zone[2].map(i => {
+				zone[2].map((i,k) => {
 					return(
 						<div 
 							key={i}
-							className='dropzone bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
+							id={i}
+							className='dropzone grid bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
 							style={{display: 'inline-flex', alignItems: 'center', justifyContent: 'center'}} 
 						>
 							<p className='f3 serif { font-family: georgia } dark-red'>
-								{i.slice(1,)}
+								{face[2][k].slice(2,)}
 
 							</p>
 							<p className='f2 serif { font-family: georgia } dark-red'>
@@ -69,15 +83,16 @@ const DropZoneGrid = () => {
 				})
 			}
 			{
-				zone[3].map(i => {
+				zone[3].map((i,k) => {
 					return(
 						<div 
 							key={i}
-							className='dropzone bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
+							id={i}
+							className='dropzone grid bg-light-gray br3 pa2 o-50 ba bw2 b--gray'
 							style={{display: 'inline-flex', alignItems: 'center', justifyContent: 'center'}} 
 						>
 							<p className='f3 serif { font-family: georgia } black'>
-								{i.slice(1,)}
+								{face[3][k].slice(2,)}
 
 							</p>
 							<p className='f2 serif { font-family: georgia } black'>

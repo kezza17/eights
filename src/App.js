@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
-import CardList from './components/CardList'
-import imageLoader from './components/images'
-import DropZoneGrid from './components/DropZoneGrid'
-import Coordinates from './components/Coordinates'
-import Message from './components/Message'
+import CardList from './components/Game/CardList'
+import imageLoader from './components/Game/images'
+import DropZoneGrid from './components/Game/DropZoneGrid'
+import Coordinates from './components/Game/Coordinates'
+import Message from './components/Game/Message'
+import StartGame from './components/Start/StartGame'
+import NamePage from './components/Start/NamePage'
+import Lobby from './components/Start/Lobby'
+import Instructions from './components/Start/Instructions'
 
 class App extends React.Component {
   constructor() {
@@ -12,8 +16,37 @@ class App extends React.Component {
     this.state = {
       images: [],
       position: [],
-      players: 0
+      players: 0,
+      route: 'game',
+      gameCode: 0
     }
+  }
+
+  users = () => [ 
+    {
+      id: 1,
+      name: 'Kelly'
+    },
+    {
+      id: 2,
+      name: 'Alex'
+    },
+    {
+      id: 3,
+      name: 'James'
+    },
+    {
+      id: 4,
+      name: 'Buren'
+    },
+    {
+      id: 5,
+      name: 'Ragga'
+    },
+  ]
+
+  onRouteChange = (route) => {
+    this.setState({route: route})
   }
 
   componentDidMount() {
@@ -21,16 +54,29 @@ class App extends React.Component {
     this.setState({images: images})
     const position = Coordinates()
     this.setState({position: position})
-    this.setState({players: 4})
+    this.setState({players: this.users().length})
   }
 
   render () {
-    const { images, position, players } = this.state;
+    const { images, position, players, route } = this.state;
     return (
       <div className="App">
-        <Message />
-        <DropZoneGrid />
-        <CardList images={images} position={position} players={players}/>
+        <Instructions />
+        { route === 'game'
+          ? <div>
+              <Message />
+              <DropZoneGrid />
+              <CardList images={images} position={position} players={players} />
+            </div>
+          : ( 
+              route === 'startgame'
+              ? <StartGame onRouteChange={this.onRouteChange} />
+              : ( route === 'namepage'
+                  ? <NamePage onRouteChange={this.onRouteChange} />
+                  : <Lobby onRouteChange={this.onRouteChange} />
+                )
+            )
+        }  
       </div>
     );
   }

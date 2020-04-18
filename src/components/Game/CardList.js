@@ -21,7 +21,11 @@ const CardList = ({ images, position, players }) => {
 
 	deck = deck.filter(filterNull)
 
-	const cardsInHand = Math.floor((deck.length)/players)
+	let cardsInHand = Math.floor((deck.length)/players)
+	const rem = deck.length%players
+	if (rem !== 0) {
+		cardsInHand++
+	}
 	let randomNum = 0
 	let hand = []
 

@@ -18,10 +18,10 @@ const dragMoveListener = (event) => {
 }
 
 const tableStart = [
-	[null, null, null, null, null, null, 'H8', null, null, null, null, null, null],
-	[null, null, null, null, null, null, 'S8', null, null, null, null, null, null],
-	[null, null, null, null, null, null, 'D8', null, null, null, null, null, null],
-	[null, null, null, null, null, null, 'C8', null, null, null, null, null, null]
+	[null, null, null, null, null, null, '♥️8', null, null, null, null, null, null],
+	[null, null, null, null, null, null, '♠️8', null, null, null, null, null, null],
+	[null, null, null, null, null, null, '♦️8', null, null, null, null, null, null],
+	[null, null, null, null, null, null, '♣️8', null, null, null, null, null, null]
 ]
 
 let table = JSON.parse(JSON.stringify(tableStart))
@@ -30,10 +30,10 @@ let msg = ''
 let message = `Alex, it's your turn`
 
 const place = (imageId) => {
-	if (imageId.length === 3) {
-			return (imageId.slice(1,)) - 2
+	if (imageId.length === 4) {
+			return (imageId.slice(2,)) - 2
 		} else {
-			return (imageId[1]) - 2
+			return (imageId[2]) - 2
 		}
 	}
 
@@ -65,10 +65,10 @@ const lastNum = (index1) => {
 
 const numDrinks = (index1) => {
 	let value = table[index1][lastNum(index1)]
-	if (value.length === 3) {
-		return ((value.slice(1,)) - (table[index1][firstNum(index1)][1]) + 1)
+	if (value.length === 4) {
+		return ((value.slice(2,)) - (table[index1][firstNum(index1)][2]) + 1)
 	} else {
-		return ((value[1]) - (table[index1][firstNum(index1)][1]) + 1)
+		return ((value[2]) - (table[index1][firstNum(index1)][2]) + 1)
 	}
 }
 
@@ -104,13 +104,13 @@ for (let i=0; i<52; i++) {
 	let imageId = images[i].id
 	const suit = (imageId) => {
 		let x = 0
-		if (imageId[0] === 'H') {
+		if (imageId.slice(0,2) === '♥️') {
 			x = 0
-		} else if (imageId[0] === 'S') {
+		} else if (imageId.slice(0,2) === '♠️') {
 			x = 1
-		} else if (imageId[0] === 'D') {
+		} else if (imageId.slice(0,2) === '♦️') {
 			x = 2
-		} else if (imageId[0] === 'C') {
+		} else if (imageId.slice(0,2) === '♣️') {
 			x = 3
 		}
 		return x
@@ -125,32 +125,30 @@ for (let i=0; i<52; i++) {
 
 		ondropactivate: function (event) {
 			event.target.classList.add('drop-active')
-			console.log('ondropactivate')
 		},
 		ondragenter: function (event) {
 			let dropzoneElement = event.target
 			let draggableElement = event.relatedTarget
 			dropzoneElement.classList.add('drop-target')
 			draggableElement.classList.add('can-drop')
-			console.log('ondragenter')
 		},
 		ondragleave: function (event) {
 			event.target.classList.remove('drop-target')
 			event.relatedTarget.classList.remove('can-drop')
-			console.log('ondragleave')
 		},
 		ondrop: function (event) {
 			event.target.classList.add('dropped-in')
-			// event.relatedTarget.classList.remove('draggable')
 			event.relatedTarget.classList.add('dropped')
+			event.target.classList.remove('b--gray')
+			event.target.classList.add('b--dark-blue')
 			let message = addCard(suit(imageId), place(imageId), imageId)
 			document.querySelector('.message').textContent = message
-			console.log('ondrop')
+			document.querySelector('.nextturn').classList.remove('hide')
+			document.querySelector('.cardholder').classList.remove('draggable')
 		},
 		ondropdeactivate: function (event) {
 			event.target.classList.remove('drop-active')
 			event.target.classList.remove('drop-target')
-			console.log('ondropactivate')
 		}
 })
 

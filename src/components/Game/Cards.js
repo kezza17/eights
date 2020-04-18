@@ -3,15 +3,15 @@ import './DropZoneCards.css'
 
 
 const Cards = ({id, src, rank, value, suit, x, y}) => {
-	const coords = [{x:610, y:66}, {x:610, y:186}, {x:610, y:306}, {x:610, y:426}]
+	const coords = [{x:610, y:115}, {x:610, y:235}, {x:610, y:355}, {x:610, y:475}]
 	const suitValue = (suit) => {
-		if (suit === 'H') {
+		if (suit === '♥️') {
 			return 0
-		} else if (suit === 'S') {
+		} else if (suit === '♠️') {
 			return 1
-		} else if (suit === 'D') {
+		} else if (suit === '♦️') {
 			return 2
-		} else if (suit === 'C') {
+		} else if (suit === '♣️') {
 			return 3
 		}
 	}
@@ -21,7 +21,7 @@ const Cards = ({id, src, rank, value, suit, x, y}) => {
 				 	<div 
 				 		style={{position: 'absolute', left: `${coords[suitValue(suit)].x}px`, top: `${coords[suitValue(suit)].y}px`}}
 						id = {id}
-						className='cardholder'
+						className='eight'
 					>
 						<img 
 							alt='card' 
