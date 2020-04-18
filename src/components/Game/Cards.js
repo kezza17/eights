@@ -36,7 +36,7 @@ const Cards = ({id, src, rank, value, suit, x, y}) => {
 		 		) : (
 		 			<div 
 						id = {id}
-						className='draggable cardholder tc bg-light-gray br3 grow bw1 shadow-3'
+						className='cardholder draggable tc bg-light-gray br3 grow bw1 shadow-3'
 					>
 						<img 
 							alt='card' 

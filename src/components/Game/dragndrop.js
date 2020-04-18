@@ -86,6 +86,14 @@ const whoDrinks = (index1, index2, imageId) => {
 	}
 }
 
+const dragToggle = () => {
+	let cardholderArray = document.querySelectorAll('.cardholder')
+	for (let i=0;i<cardholderArray.length;i++) {
+		cardholderArray[i].classList.remove('draggable')
+	}
+	return cardholderArray
+}
+
 interact ('.draggable:not(.dropped)')
 	.draggable({
 		inertia: true,
@@ -144,7 +152,7 @@ for (let i=0; i<52; i++) {
 			let message = addCard(suit(imageId), place(imageId), imageId)
 			document.querySelector('.message').textContent = message
 			document.querySelector('.nextturn').classList.remove('hide')
-			document.querySelector('.cardholder').classList.remove('draggable')
+			dragToggle()
 		},
 		ondropdeactivate: function (event) {
 			event.target.classList.remove('drop-active')

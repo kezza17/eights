@@ -5,7 +5,13 @@ import './DropZoneCards.css'
 const Message = () => {
 	let message1 = () => { document.querySelector('.message').textContent = `Alex, it's your turn`}
 	let hide = () => {document.querySelector('.nextturn').classList.add('hide')};
-	let drag = () => {document.querySelector('.cardholder').classList.add('draggable')}
+	let drag = () => {
+		let cardholderArray = document.querySelectorAll('.cardholder')
+		for (let i=0;i<cardholderArray.length;i++) {
+			cardholderArray[i].classList.add('draggable')
+		}
+		return cardholderArray
+	}
 	return (
 		<div className='flex'>
 			<div style={{height: 40}} className='center'>
